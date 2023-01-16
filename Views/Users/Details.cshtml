@@ -1,0 +1,78 @@
+﻿@model BibliotekaMvc.Models.User
+
+@{
+    ViewData["Title"] = "Szczegóły użytkownika";
+}
+
+<h1>Szczegółowe informacje o użytkowniku</h1>
+
+<div>
+    
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Imie)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Imie)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nazwisko)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nazwisko)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Address.Miasto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address.Miasto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address.Ulica)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address.Ulica)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address.NrDomu)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address.NrDomu)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address.NrTelefonu)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address.NrTelefonu)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <p><h5>Książki wypożyczone:</h5></p>
+    <ol>
+        @foreach (var book in Model.BookUsers)
+        {
+            <li>
+                @book.Id
+                <br/>
+                @book.DataWyp
+                <br/>
+                @book.DataOd
+            </li>
+        }
+    </ol>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BibliotekaMvc.Models.BookUser>
+
+@{
+    ViewData["Title"] = "Wypożyczanie";
+}
+
+<h1>Wypożyczanie</h1>
+
+<p>
+    <a asp-action="Create">Nowe wypożyczenie</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Użytkownik
+            </th>
+            <th>
+                Książka
+            </th>
+            <th>
+                Data Wypożyczenia
+            </th>
+            <th>
+                Data Oddania
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FullUserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Tytul)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataWyp)
+            </td>
+            <td class="@(item.DataOd < DateTime.Now ? "text-danger" : "")">
+                @Html.DisplayFor(modelItem => item.DataOd)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
