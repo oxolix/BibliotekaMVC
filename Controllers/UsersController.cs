@@ -23,7 +23,7 @@ namespace BibliotekaMvc.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.User != null ? 
-                          View(await _context.User.Include(u=>u.BookUsers).ToListAsync()) :
+                          View(await _context.User.Include(u=>u.BookUsers).ThenInclude(u=>u.Book).ToListAsync()) :
                           Problem("Entity set 'BibliotekaContext.User'  is null.");
         }
 
@@ -35,7 +35,7 @@ namespace BibliotekaMvc.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User.Include(u=>u.Address).Include(u=>u.BookUsers)
+            var user = await _context.User.Include(u=>u.Address).Include(u=>u.BookUsers).ThenInclude(u => u.Book)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
